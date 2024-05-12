@@ -1,0 +1,35 @@
+{
+  "palabras": [
+    {
+      "id": "1",
+      "palabra": "fuego"
+    },
+    {
+      "id": "2",
+      "palabra": "perla"
+    },
+    {
+      "id": "3",
+      "palabra": "perro"
+    },
+    {
+      "id": "4",
+      "palabra": "sapas"
+    },
+    {
+      "id": "5",
+      "palabra": "borra"
+    },
+    {
+      "id": "6",
+      "palabra": "almas"
+    }
+  ],
+  "record": [
+    {
+      "id": "1",
+      "email": "davidmianocoro@gmail.com",
+      "time": 600
+    }
+  ]
+}
