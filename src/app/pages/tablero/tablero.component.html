@@ -1,2 +1,10 @@
 <app-palabra *ngFor="let item of iteracion; index as i" [palabra]="palabra" [cont]="i" [turno]="turno"></app-palabra>
-<button (click)="turno=turno+1">Enviar</button>
+<button (click)="avanzarTurno()">Enviar</button>
+<select [(ngModel)]="nivel" (change)="reiniciarJuego()">
+  <option value="facil">Fácil</option>
+  <option value="normal">Normal</option>
+  <option value="dificil">Difícil</option>
+</select>
+
+
+  

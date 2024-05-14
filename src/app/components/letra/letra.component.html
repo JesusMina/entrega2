@@ -1,1 +1,1 @@
-<input type="text" [ngModel]="miletra">
+<input type="text" [(ngModel)]="miletra" (keyup)="verificar()" maxlength="1" [ngClass]="{'acierto': sass==='acierto', 'absent': sass==='absent', 'present': sass==='present'}">
