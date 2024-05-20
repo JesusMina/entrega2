@@ -7,18 +7,17 @@ import { PalabraService } from 'src/app/services/palabra.service';
   styleUrls: ['./tablero.component.sass']
 })
 export class TableroComponent implements OnInit {
-  // Conjunto de palabras posibles
   public palabras: string[] = [];
-  // Palabras a adivinar
   public palabra: string = '';
-  public iteracion: any[] = [];
+  public iteracion: string[][] = [];
   public turno = 0;
-  public nivel: string = 'normal'; // Nivel por defecto
+  public nivel: string = 'normal';
+  public tiempo: number = 0;
+  private intervalo: any;
 
   constructor(public palabraSer: PalabraService) { }
 
   ngOnInit(): void {
-    // Cargar palabras y seleccionar una al azar al inicio
     this.palabraSer.get().subscribe((res: any) => {
       res.forEach((element: any) => {
         this.palabras.push(element.palabra);
@@ -27,13 +26,11 @@ export class TableroComponent implements OnInit {
     });
   }
 
-  // Método para seleccionar una palabra al azar
   seleccionarPalabra(): void {
     this.palabra = this.palabras[Math.floor(Math.random() * this.palabras.length)];
-    this.iteracion = new Array(this.obtenerIntentos()).fill('');
+    this.iteracion = Array.from({ length: this.obtenerIntentos() }, () => Array(this.palabra.length).fill(''));
   }
 
-  // Método para obtener el número de intentos según el nivel seleccionado
   obtenerIntentos(): number {
     switch (this.nivel) {
       case 'facil':
@@ -43,26 +40,43 @@ export class TableroComponent implements OnInit {
       case 'dificil':
         return 3;
       default:
-        return 6; // Nivel por defecto: normal
+        return 6;
     }
   }
 
-  // Método para avanzar al siguiente turno
   avanzarTurno(): void {
-    // Verificar si el juego ha terminado
     if (this.turno >= this.obtenerIntentos()) {
-      // Aquí puedes agregar lógica para el final del juego
+      this.detenerCronometro();
       console.log('Juego terminado');
       return;
     }
-    // Incrementar el turno
     this.turno++;
   }
 
-  // Método para reiniciar el juego
   reiniciarJuego(): void {
     this.turno = 0;
+    this.tiempo = 0;
     this.seleccionarPalabra();
+    this.detenerCronometro();
+  }
+
+  iniciarCronometro(): void {
+    if (this.intervalo) {
+      clearInterval(this.intervalo);
+    }
+    this.intervalo = setInterval(() => {
+      this.tiempo++;
+    }, 1000);
+  }
+
+  detenerCronometro(): void {
+    if (this.intervalo) {
+      clearInterval(this.intervalo);
+      this.intervalo = null;
+    }
+  }
+
+  actualizarLetra(letra: string, indice: number): void {
+    this.iteracion[this.turno][indice] = letra;
   }
 }
-

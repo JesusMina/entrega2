@@ -1,3 +1,5 @@
+<div>Tiempo: {{ tiempo }} segundos</div>
+<button (click)="iniciarCronometro()">Iniciar</button>
 <app-palabra *ngFor="let item of iteracion; index as i" [palabra]="palabra" [cont]="i" [turno]="turno"></app-palabra>
 <button (click)="avanzarTurno()">Enviar</button>
 <select [(ngModel)]="nivel" (change)="reiniciarJuego()">
@@ -5,6 +7,9 @@
   <option value="normal">Normal</option>
   <option value="dificil">Difícil</option>
 </select>
+
+
+
 
 
   
