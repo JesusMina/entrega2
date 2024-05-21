@@ -1,15 +1,13 @@
-<div>Tiempo: {{ tiempo }} segundos</div>
-<button (click)="iniciarCronometro()">Iniciar</button>
-<app-palabra *ngFor="let item of iteracion; index as i" [palabra]="palabra" [cont]="i" [turno]="turno"></app-palabra>
-<button (click)="avanzarTurno()">Enviar</button>
-<select [(ngModel)]="nivel" (change)="reiniciarJuego()">
-  <option value="facil">Fácil</option>
-  <option value="normal">Normal</option>
-  <option value="dificil">Difícil</option>
-</select>
-
-
-
-
-
-  
+<div style="display: flex;">
+  <div style="display: flex; flex-direction: column; margin-right: 20px;">
+    <button (click)="cambiarNivel('facil')">Fácil</button>
+    <button (click)="cambiarNivel('normal')">Normal</button>
+    <button (click)="cambiarNivel('dificil')">Difícil</button>
+  </div>
+  <div>
+    <div>Tiempo: {{ tiempo }} segundos</div>
+    <button (click)="iniciarCronometro()">Iniciar</button>
+    <app-palabra *ngFor="let item of iteracion; index as i" [palabra]="palabra" [cont]="i" [turno]="turno" [letrasIngresadas]="item.letras" [clasesLetras]="item.clases" (letraActualizada)="actualizarLetra($event)"></app-palabra>
+    <button (click)="avanzarTurno()">Enviar</button>
+  </div>
+</div>

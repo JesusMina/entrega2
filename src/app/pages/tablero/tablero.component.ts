@@ -9,7 +9,7 @@ import { PalabraService } from 'src/app/services/palabra.service';
 export class TableroComponent implements OnInit {
   public palabras: string[] = [];
   public palabra: string = '';
-  public iteracion: string[][] = [];
+  public iteracion: { letras: string[], clases: string[] }[] = [];
   public turno = 0;
   public nivel: string = 'normal';
   public tiempo: number = 0;
@@ -28,7 +28,7 @@ export class TableroComponent implements OnInit {
 
   seleccionarPalabra(): void {
     this.palabra = this.palabras[Math.floor(Math.random() * this.palabras.length)];
-    this.iteracion = Array.from({ length: this.obtenerIntentos() }, () => Array(this.palabra.length).fill(''));
+    this.iteracion = Array.from({ length: this.obtenerIntentos() }, () => ({ letras: Array(this.palabra.length).fill(''), clases: Array(this.palabra.length).fill('') }));
   }
 
   obtenerIntentos(): number {
@@ -76,7 +76,16 @@ export class TableroComponent implements OnInit {
     }
   }
 
-  actualizarLetra(letra: string, indice: number): void {
-    this.iteracion[this.turno][indice] = letra;
+  actualizarLetra(event: { letra: string, indice: number, estado: string }): void {
+    this.iteracion[this.turno].letras[event.indice] = event.letra;
+    this.iteracion[this.turno].clases[event.indice] = event.estado;
+  }
+
+  cambiarNivel(nuevoNivel: string): void {
+    const confirmar = window.confirm('Cambiar el nivel reiniciará el juego y se perderá el progreso actual. ¿Desea continuar?');
+    if (confirmar) {
+      this.nivel = nuevoNivel;
+      this.reiniciarJuego();
+    }
   }
 }

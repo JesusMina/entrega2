@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-letra',
@@ -10,16 +10,20 @@ export class LetraComponent implements OnInit {
   @Input() palabra: string = '';
   @Input() turnoActual: number = 0;
   @Input() indice: number = 0;
+  @Input() estadoInicial: string = '';
+  @Output() letraActualizada = new EventEmitter<{ letra: string, indice: number, estado: string }>();
+
   public miletra: string = '';
   public sass: string = '';
 
   ngOnInit(): void {
-    this.miletra = ''; // Initialize the letter
+    this.miletra = '';
+    this.sass = this.estadoInicial; // Set initial class
   }
 
   verificar(): void {
     if (this.miletra.trim() === '') {
-      this.sass = ''; // Restablecer el estado de CSS cuando la opción se borra
+      this.sass = ''; // Reset CSS state when option is cleared
     } else if (this.miletra === this.letra) {
       this.sass = 'acierto';
     } else if (this.palabra.includes(this.miletra)) {
@@ -27,13 +31,6 @@ export class LetraComponent implements OnInit {
     } else {
       this.sass = 'absent';
     }
+    this.letraActualizada.emit({ letra: this.miletra, indice: this.indice, estado: this.sass });
   }
 }
-
-
-  
-  
-  
-
-  
-
