@@ -9,7 +9,7 @@ import { PalabraService } from 'src/app/services/palabra.service';
 export class TableroComponent implements OnInit {
   public palabras: string[] = [];
   public palabra: string = '';
-  public iteracion: { letras: string[], clases: string[], showColors: boolean }[] = [];  // Se añadió la propiedad showColors a la estructura iteracion para controlar cuándo se deben mostrar los colores de las letras.
+  public iteracion: { letras: string[], clases: string[], showColors: boolean }[] = [];
   public turno = 0;
   public nivel: string = 'normal';
   public tiempo: number = 0;
@@ -29,7 +29,11 @@ export class TableroComponent implements OnInit {
 
   seleccionarPalabra(): void {
     this.palabra = this.palabras[Math.floor(Math.random() * this.palabras.length)];
-    this.iteracion = Array.from({ length: this.obtenerIntentos() }, () => ({ letras: Array(this.palabra.length).fill(''), clases: Array(this.palabra.length).fill(''), showColors: false }));
+    this.iteracion = Array.from({ length: this.obtenerIntentos() }, () => ({
+      letras: Array(this.palabra.length).fill(''),
+      clases: Array(this.palabra.length).fill(''),
+      showColors: false
+    }));
   }
 
   obtenerIntentos(): number {
@@ -46,12 +50,13 @@ export class TableroComponent implements OnInit {
   }
 
   avanzarTurno(): void {
-    if (this.turno >= this.obtenerIntentos() - 1) {
+    if (this.turno >= this.obtenerIntentos()) {
       this.detenerCronometro();
       console.log('Juego terminado');
       return;
     }
-    this.iteracion[this.turno].showColors = true;  // Show colors for the current turn
+    this.iteracion[this.turno].showColors = true;  // Mostrar colores después de enviar el turno
+    this.verificarVictoria();  // Check for victory after updating the turn
     this.turno++;
   }
 
@@ -90,4 +95,16 @@ export class TableroComponent implements OnInit {
       this.reiniciarJuego();
     }
   }
+
+  verificarVictoria(): void {
+    const todasAciertos = this.iteracion[this.turno].clases.every(clase => clase === 'acierto');
+    if (todasAciertos) {
+      this.detenerCronometro();
+      setTimeout(() => {
+        alert('¡Has ganado!');
+        this.reiniciarJuego();  // Reiniciar el juego después de cerrar el mensaje de victoria
+      }, 500);  // Retraso de 500 ms antes de mostrar el mensaje de victoria
+    }
+  }
 }
+
