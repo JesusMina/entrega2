@@ -11,8 +11,8 @@ export class PalabraComponent implements OnInit {
   @Input() turno!: number;
   @Input() letrasIngresadas: string[] = [];
   @Input() clasesLetras: string[] = [];
+  @Input() showColors: boolean = false;  // New input to control color display
   @Output() letraActualizada = new EventEmitter<{ letra: string, indice: number, estado: string }>();
-
   public letras: string[] = [];
 
   ngOnInit(): void {

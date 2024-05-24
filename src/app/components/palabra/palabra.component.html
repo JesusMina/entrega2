@@ -1,6 +1,6 @@
 <div class="palabra">
   <ng-container *ngIf="turno == cont">
-    <app-letra *ngFor="let letra of letras; index as i" [letra]="letra" [palabra]="palabra" [turnoActual]="turno" [indice]="i" [estadoInicial]="clasesLetras[i]" (letraActualizada)="actualizarLetra($event)"></app-letra>
+    <app-letra *ngFor="let letra of letras; index as i" [letra]="letra" [palabra]="palabra" [turnoActual]="turno" [indice]="i" [estadoInicial]="clasesLetras[i]" [showColors]="showColors" (letraActualizada)="actualizarLetra($event)"></app-letra>
   </ng-container>
   <ng-container *ngIf="turno !== cont">
     <input *ngFor="let letra of letras; index as i" type="text" [value]="letrasIngresadas[i] || ''" [ngClass]="clasesLetras[i] || ''" disabled />

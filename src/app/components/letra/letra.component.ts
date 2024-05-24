@@ -11,6 +11,7 @@ export class LetraComponent implements OnInit {
   @Input() turnoActual: number = 0;
   @Input() indice: number = 0;
   @Input() estadoInicial: string = '';
+  @Input() showColors: boolean = false;  // New input to control color display
   @Output() letraActualizada = new EventEmitter<{ letra: string, indice: number, estado: string }>();
 
   public miletra: string = '';

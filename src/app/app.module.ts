@@ -9,12 +9,16 @@ import { PalabraComponent } from './components/palabra/palabra.component';
 import { LetraComponent } from './components/letra/letra.component';
 import { FormsModule} from '@angular/forms';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     TableroComponent,
     PalabraComponent,
-    LetraComponent
+    LetraComponent,
+  
+
   ],
   imports: [
     BrowserModule,

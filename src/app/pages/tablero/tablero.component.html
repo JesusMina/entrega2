@@ -7,7 +7,8 @@
   <div>
     <div>Tiempo: {{ tiempo }} segundos</div>
     <button (click)="iniciarCronometro()">Iniciar</button>
-    <app-palabra *ngFor="let item of iteracion; index as i" [palabra]="palabra" [cont]="i" [turno]="turno" [letrasIngresadas]="item.letras" [clasesLetras]="item.clases" (letraActualizada)="actualizarLetra($event)"></app-palabra>
+    <app-palabra *ngFor="let item of iteracion; index as i" [palabra]="palabra" [cont]="i" [turno]="turno" [letrasIngresadas]="item.letras" [clasesLetras]="item.clases" [showColors]="item.showColors" (letraActualizada)="actualizarLetra($event)"></app-palabra>
     <button (click)="avanzarTurno()">Enviar</button>
+    <button (click)="reiniciarJuego()">Reiniciar</button>
   </div>
 </div>

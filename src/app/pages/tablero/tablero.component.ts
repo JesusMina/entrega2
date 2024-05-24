@@ -9,7 +9,7 @@ import { PalabraService } from 'src/app/services/palabra.service';
 export class TableroComponent implements OnInit {
   public palabras: string[] = [];
   public palabra: string = '';
-  public iteracion: { letras: string[], clases: string[] }[] = [];
+  public iteracion: { letras: string[], clases: string[], showColors: boolean }[] = [];  // Se añadió la propiedad showColors a la estructura iteracion para controlar cuándo se deben mostrar los colores de las letras.
   public turno = 0;
   public nivel: string = 'normal';
   public tiempo: number = 0;
@@ -23,12 +23,13 @@ export class TableroComponent implements OnInit {
         this.palabras.push(element.palabra);
       });
       this.seleccionarPalabra();
+      console.log(this.palabra);
     });
   }
 
   seleccionarPalabra(): void {
     this.palabra = this.palabras[Math.floor(Math.random() * this.palabras.length)];
-    this.iteracion = Array.from({ length: this.obtenerIntentos() }, () => ({ letras: Array(this.palabra.length).fill(''), clases: Array(this.palabra.length).fill('') }));
+    this.iteracion = Array.from({ length: this.obtenerIntentos() }, () => ({ letras: Array(this.palabra.length).fill(''), clases: Array(this.palabra.length).fill(''), showColors: false }));
   }
 
   obtenerIntentos(): number {
@@ -45,11 +46,12 @@ export class TableroComponent implements OnInit {
   }
 
   avanzarTurno(): void {
-    if (this.turno >= this.obtenerIntentos()) {
+    if (this.turno >= this.obtenerIntentos() - 1) {
       this.detenerCronometro();
       console.log('Juego terminado');
       return;
     }
+    this.iteracion[this.turno].showColors = true;  // Show colors for the current turn
     this.turno++;
   }
 
