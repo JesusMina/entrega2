@@ -8,6 +8,7 @@ import { TableroComponent } from './pages/tablero/tablero.component';
 import { PalabraComponent } from './components/palabra/palabra.component';
 import { LetraComponent } from './components/letra/letra.component';
 import { FormsModule} from '@angular/forms';
+import { InicioComponent } from './pages/inicio/inicio.component';
 
 
 
@@ -17,6 +18,7 @@ import { FormsModule} from '@angular/forms';
     TableroComponent,
     PalabraComponent,
     LetraComponent,
+    InicioComponent,
   
 
   ],

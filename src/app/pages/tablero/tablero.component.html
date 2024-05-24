@@ -1,14 +1,32 @@
-<div style="display: flex;">
-  <div style="display: flex; flex-direction: column; margin-right: 20px;">
-    <button (click)="cambiarNivel('facil')">Fácil</button>
-    <button (click)="cambiarNivel('normal')">Normal</button>
-    <button (click)="cambiarNivel('dificil')">Difícil</button>
+<div class="main-container">
+  <div class="left-sidebar">
+    <button class="btn facil" (click)="cambiarNivel('facil')">Fácil</button>
+    <button class="btn normal" (click)="cambiarNivel('normal')">Normal</button>
+    <button class="btn dificil" (click)="cambiarNivel('dificil')">Difícil</button>
   </div>
-  <div>
+  <div class="left-content">
     <div>Tiempo: {{ tiempo }} segundos</div>
     <button (click)="iniciarCronometro()">Iniciar</button>
     <app-palabra *ngFor="let item of iteracion; index as i" [palabra]="palabra" [cont]="i" [turno]="turno" [letrasIngresadas]="item.letras" [clasesLetras]="item.clases" [showColors]="item.showColors" (letraActualizada)="actualizarLetra($event)"></app-palabra>
     <button (click)="avanzarTurno()">Enviar</button>
     <button (click)="reiniciarJuego()">Reiniciar</button>
+  </div>
+  <div class="right-content">
+    <h3>Tabla de Posiciones</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Tiempo (s)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of records">
+          <td>{{ record.nombre }}</td>
+          <td>{{ record.tiempo }}</td>
+          <td><button (click)="eliminarRecord(record.id)">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

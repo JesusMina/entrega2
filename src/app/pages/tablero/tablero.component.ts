@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PalabraService } from 'src/app/services/palabra.service';
+import { DataService } from 'src/app/services/data.service';
+import { RecordService } from 'src/app/services/record.service';
 
 @Component({
   selector: 'app-tablero',
@@ -13,11 +15,18 @@ export class TableroComponent implements OnInit {
   public turno = 0;
   public nivel: string = 'normal';
   public tiempo: number = 0;
+  public nombreUsuario: string = '';
+  public records: { id: string, nombre: string, tiempo: number }[] = [];
   private intervalo: any;
 
-  constructor(public palabraSer: PalabraService) { }
+  constructor(
+    private palabraSer: PalabraService,
+    private dataService: DataService,
+    private recordService: RecordService
+  ) { }
 
   ngOnInit(): void {
+    this.nombreUsuario = this.dataService.getNombreUsuario();
     this.palabraSer.get().subscribe((res: any) => {
       res.forEach((element: any) => {
         this.palabras.push(element.palabra);
@@ -25,6 +34,8 @@ export class TableroComponent implements OnInit {
       this.seleccionarPalabra();
       console.log(this.palabra);
     });
+    this.cargarRecords();
+    
   }
 
   seleccionarPalabra(): void {
@@ -52,11 +63,10 @@ export class TableroComponent implements OnInit {
   avanzarTurno(): void {
     if (this.turno >= this.obtenerIntentos()) {
       this.detenerCronometro();
-      console.log('Juego terminado');
       return;
     }
-    this.iteracion[this.turno].showColors = true;  // Mostrar colores después de enviar el turno
-    this.verificarVictoria();  // Check for victory after updating the turn
+    this.iteracion[this.turno].showColors = true;
+    this.verificarVictoria();
     this.turno++;
   }
 
@@ -100,11 +110,25 @@ export class TableroComponent implements OnInit {
     const todasAciertos = this.iteracion[this.turno].clases.every(clase => clase === 'acierto');
     if (todasAciertos) {
       this.detenerCronometro();
+      this.recordService.addRecord({ nombre: this.nombreUsuario, tiempo: this.tiempo }).subscribe(() => {
+        this.cargarRecords();
+      });
       setTimeout(() => {
         alert('¡Has ganado!');
-        this.reiniciarJuego();  // Reiniciar el juego después de cerrar el mensaje de victoria
-      }, 500);  // Retraso de 500 ms antes de mostrar el mensaje de victoria
+        this.reiniciarJuego();
+      }, 500);
     }
   }
-}
 
+  cargarRecords(): void {
+    this.recordService.getRecords().subscribe((records: any[]) => {
+      this.records = records;
+    });
+  }
+
+  eliminarRecord(id: string): void {
+    this.recordService.deleteRecord(id).subscribe(() => {
+      this.cargarRecords();
+    });
+  }
+}

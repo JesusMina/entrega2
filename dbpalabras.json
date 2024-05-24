@@ -23,14 +23,27 @@
     {
       "id": "6",
       "palabra": "almas"
+    },
+    {
+      "id": "7",
+      "palabra": "wendy"
     }
-    
   ],
-  "record": [
+  "records": [
     {
       "id": "1",
-      "email": "davidmianocoro@gmail.com",
-      "time": 600
+      "nombre": "David",
+      "tiempo": 600
+    },
+    {
+      "id": "c3a3",
+      "nombre": "JESUS",
+      "tiempo": 27
+    },
+    {
+      "id": "7e69",
+      "nombre": "Jesus Mina",
+      "tiempo": 4
     }
   ]
 }
