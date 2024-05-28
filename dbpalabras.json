@@ -26,24 +26,57 @@
     },
     {
       "id": "7",
-      "palabra": "ritmo"
+      "palabra": "carro"
+    },
+    {
+      "id": "8",
+      "palabra": "mango"
+    },
+    {
+      "id": "9",
+      "palabra": "cargo"
+    },
+    {
+      "id": "10",
+      "palabra": "perro"
+    },
+    {
+      "id": "11",
+      "palabra": "sapos"
+    },
+    {
+      "id": "12",
+      "palabra": "camas"
+    },
+    {
+      "id": "13",
+      "palabra": "armas"
+    },
+    {
+      "id": "14",
+      "palabra": "menta"
     }
   ],
   "records": [
     {
-      "id": "e84e",
-      "nombre": "Jesus",
-      "tiempo": 14
+      "id": "53aa",
+      "nombre": "j",
+      "tiempo": 24
     },
     {
-      "id": "0ddc",
-      "nombre": "Jesus D",
-      "tiempo": 16
+      "id": "428f",
+      "nombre": "p",
+      "tiempo": 0
     },
     {
-      "id": "f194",
-      "nombre": "Jesus M",
-      "tiempo": 40
+      "id": "5f12",
+      "nombre": "p",
+      "tiempo": 11
+    },
+    {
+      "id": "0c28",
+      "nombre": "p",
+      "tiempo": 4
     }
   ]
 }
