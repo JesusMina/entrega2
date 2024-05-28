@@ -1,3 +1,4 @@
 <p>Ingresa tu Nombre</p>
 <input type="text" [(ngModel)]="nombre">
+<div *ngIf="nombreRequerido" class="error">El nombre es obligatorio</div>
 <button (click)="guardarNombre()">Jugar</button>

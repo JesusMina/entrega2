@@ -26,24 +26,24 @@
     },
     {
       "id": "7",
-      "palabra": "wendy"
+      "palabra": "ritmo"
     }
   ],
   "records": [
     {
-      "id": "1",
-      "nombre": "David",
-      "tiempo": 600
+      "id": "e84e",
+      "nombre": "Jesus",
+      "tiempo": 14
     },
     {
-      "id": "c3a3",
-      "nombre": "JESUS",
-      "tiempo": 27
+      "id": "0ddc",
+      "nombre": "Jesus D",
+      "tiempo": 16
     },
     {
-      "id": "7e69",
-      "nombre": "Jesus Mina",
-      "tiempo": 4
+      "id": "f194",
+      "nombre": "Jesus M",
+      "tiempo": 40
     }
   ]
 }
